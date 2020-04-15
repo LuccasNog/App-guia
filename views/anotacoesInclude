@@ -1,0 +1,3 @@
+chamando o partils 
+
+<%- include ('./partials/header.ejs/) %>

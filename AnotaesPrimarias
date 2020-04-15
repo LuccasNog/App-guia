@@ -1,0 +1,25 @@
+ //Exibindo o html no html
+            //pegando o que usuário colocar na rota com req.params
+    var nome = req.params.nome;
+    var lang = req.params.lang;
+    var exibirMsg = false;
+
+    var produtos = [
+        //Criando os produtos
+        {nome: "Doritos", preco: 1.90},
+        {nome: "Coca-cola", preco: 6.00},
+        {nome: "Leite", preco: 1.20}        
+    ]
+
+     res.render("index",{
+        //Exibindo o nome e linguagem que usuário colocou na rota
+        nome: nome,
+        lang: lang,
+        empresa: "Biscoint",
+        msg: exibirMsg,
+        //Passando array de produtos para o html
+        produtos: produtos
+    });7
+
+
+    //para trampar com mysqli  tenho que install npm install --save sequelize e npms install mysql2

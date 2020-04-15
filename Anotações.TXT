@@ -1,0 +1,9 @@
+endpoint é arquivo principal do projeto
+
+EJS - vai exibir o html , reendenizar = exibir o html (desenha na tela) npm install ejs --save 
+npm install express
+
+Arquivos estaticos são arquivos que não são processados no back 
+Por exemplo: css js front, img 
+
+utilizando arquivos satic no expres 

@@ -1,0 +1,76 @@
+l[ogica do js]
+           //pegando o que usuário colocar na rota com req.params
+    var nome = req.params.nome;
+    var lang = req.params.lang;
+    var exibirMsg = false;
+    let admin =  true;
+    let staff = false;
+    res.render("index",{
+        //Exibindo o nome e linguagem que usuário colocou na rota
+        nome: nome,
+        lang: lang,
+        empresa: "Biscoint",
+        msg: exibirMsg,
+        botao: admin,
+        botaoStaff: staff
+    });
+
+
+
+
+
+
+
+
+exemplo botao com ejs
+
+
+
+          <% if (botao) { %>
+                <p>Parabens, você é admin</p>
+                <button>Clica admin</button>
+          <%} else {%>
+                <h2>Você não é admin</h2>
+          <%}%>  
+
+
+          <% if (botaoStaff) { %>
+                <p>Parabéns, você é um administrador staff</p>
+                <button>Clicando Staff</button>
+          <% } else { %>
+              
+          <% } %> 
+
+
+
+    ANOTAÇÕES EJS
+
+
+    
+        <h1>Guia de Perguntas</h1>
+        <hr>
+        <h3>Lista de perguntas</h3>
+        
+        <!--Chamando as variaveis que criei no render-->
+        <!-- essa tag  <%=  %> SIGNIFICA EXIBIR VALOR DA VARIAVEL  -->
+       <p>Nome: <%= nome %></p> 
+        <p>Linguagem favorita:<%= lang %></p>
+        <p>Empresa: <%= empresa %></p>
+
+         <!-- criando condição no ejs, exemplo da pra criar um botão que aparece apenas para admin e botão que aparece para staff-->   
+         <% if(msg) {%>  
+            <h3>Isso é uma msg de erro !</h3>   
+        <% } else{ %>   
+                <h3>Nenhum erro</h3>
+         <% } %>
+
+
+
+        <!-- Trabalhando com foreach, SINTAXE: Para cada elemento do array, ele vai executar uma funcao -->
+         <% produtos.forEach(function(produto){ %>
+            <hr>
+            <h4><%= produto.nome %></h4> 
+            <h3><%= produto.preco %></h3>
+         <% }) %>  
+         <!-- colocando a iamge
+      -->      

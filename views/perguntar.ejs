@@ -1,0 +1,36 @@
+
+
+<!-- Importar o cabeçalho-->
+<%- include ("partials/header") %>
+    <body>
+        <!-- Importar o nav-->
+        <%- include ("partials/nav-bar") %>
+       <!-- Aqui vamos criar o formulário de perguntas-->
+       <div class="container">
+           
+            <div class="card" id="formulario-pergunta">
+                <!-- criando uma div para o cabeçalho do card-->
+                <div class="card-header">
+                    <!--conteiner centraliza o conteudo-->
+                    <h3>Realizar Pergunta</h3>
+                </div>
+               <!-- criando uma div para o corpo do card-->
+                <div class="card-body">
+                    <!-- Sempre fazer formulário com POST-->
+                    <form method="POST" action="salvarpergunta">
+                        <br> <label>Titulo</label>
+                        <!-- titutlo da pergunta -->
+                            <input type="text" placeholder="titulo" class="form-control" name="titulo">
+                            <br><label>Descrição</label> <!-- coloquei a label para pular linha e ficar mais bonito-->
+                        <!-- titutlo da pergunta, a class form-control deixa o input mais bonito -->
+                            <textarea placeholder="Descreva sua pergunta"  class="form-control" name="descricao"></textarea>
+                            <!-- button para o usuário confirmar a sua pergunta, a classe do bootstrap que deixa ele bonito-->
+                            <br>
+                            <button class="btn btn-primary" type="submit">Perguntar</button>
+                   </form>
+                </div>
+            </div>
+
+       </div>
+    </body>
+    <%- include ("partials/footer") %>

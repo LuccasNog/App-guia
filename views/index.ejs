@@ -1,0 +1,27 @@
+<!-- Importar o cabeçalho-->
+<%- include ("partials/header") %>
+<body>
+    <%- include ("partials/nav-bar") %>
+    <div class="container">
+        <hr>
+        <h1>Perguntas</h1>
+        <hr>
+        <!-- Transformando link em botao-->
+        <a href="/perguntar" class="btn btn-primary">Realizar a pergunta</a>
+        <hr>
+        <!-- Aqui vamos percorrer array de perguntas-->
+        <% perguntas.forEach(pergunta => { %>
+            <br>
+            <div class="card">
+                <div class="card-body">
+                     <!-- Exebiri o titulo da pergunta em paragravo-->
+                      <h3><%= pergunta.titulo %></h3>   
+                </div>
+                <div class="card-footer">
+                   <button class="btn btn-primary">Responder</button>
+                </div>
+            </div>
+        <% }) %>
+     </div>
+</body>
+<%- include ("partials/footer") %>
