@@ -11,6 +11,7 @@ const connection = require('./database/database');
 //Importando a tabel 
 const Pergunta = require('./database/Pergunta');
 
+const Resposta = require('./database/Resposta');
 
 
 
@@ -55,7 +56,12 @@ app.get('/', (req, res) => {
 
     //Pesquisando sobre as perguntas = SELECT * ALL FROM pergunta 
             //RAW SIGNIFICADA CRU, ele vai fazer os dados
-    Pergunta.findAll({raw: true}).then(perguntas => {
+    Pergunta.findAll({raw: true, order:[
+        // no order: vamos ordernar por id 
+
+        //Colocando regra de ordenação 1 - id, 2- descrente 
+        ['id', 'DESC']
+    ]}).then(perguntas => {
            // passando as perguntas para o front and
            res.render("index",{
                perguntas: perguntas
@@ -95,7 +101,69 @@ app.post('/salvarpergunta', (req, res) => {
 
 
 
-/**
+
+//Busca atraves de condições -> condicional com sequelize
+app.get('/pergunta/:id', (req, res) => {
+    //Pegar o id que usuário digitou na rota
+    var id = req.params.id;
+    //Fazendo busca no banco pelo que uusário digitou 
+
+    //O model pergunta representa a tabela  = Pesquisando a pergunta no bd
+    Pergunta.findOne({
+        where: {
+            //buscando a pergunta que tem o id igual a variavel id
+            id: id
+        }
+    }).then(pergunta => { // o then vai nos retornar a pergunta
+        //verificando se a pergunta foi achada
+        if(pergunta != undefined) { //Pergunta achada
+
+            // Aqui vamos fazer uma busca no banco de ados para trazer todas as respostas correspondentes a pergunta
+            Resposta.findAll({
+                where: {perguntaId: pergunta.id},
+               // ordenar pelo id
+               order:[ ['id', 'DESC'] ]
+            }).then(respostas => {
+                //Exibir a página da perguntae.ejs
+                 res.render("pergunta", {
+                    // Vamos usar a variavel pergunta lá na view pergunta.ejs igual no começo do modulo
+                    pergunta: pergunta,
+                    //Passando as respostas para que pesquisei para view
+                    respostas: respostas
+                 });
+            })   
+        }
+        else{ // Não encontrada
+            //redirecionar para página principal
+            res.redirect("/");
+        }
+    })
+})
+
+//Routes para resposta -> post pq vai receber dados do formulário
+app.post('/responder', (req, res) => {
+    //RECEBENDO  OS DADOS DO FORMULÁRIO
+
+    //vai receber o conteudo da textarea
+    let corpo = req.body.corpo;
+    //Pegando o id da pergunta respondida 
+    let perguntaId = req.body.pergunta;
+
+    //Criar uma nova resposta, chamando o model de resposta
+    Resposta.create({
+        corpo: corpo,
+        perguntaId: perguntaId
+    }).then(() => {
+        //redirecionar para a página da perguntaID
+        res.redirect("/pergunta/" + perguntaId);
+     });
+})  
+
+
+
+
+
+/*
  * RODANDO O SERVIDOR
  */
 app.listen(3004, (error) => {

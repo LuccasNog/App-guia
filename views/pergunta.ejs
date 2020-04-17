@@ -1,0 +1,37 @@
+<!-- Importar o cabeçalho-->
+<%- include ("partials/header") %>
+<body>
+    <%- include ("partials/nav-bar") %>
+    <div class="container">
+        <hr>
+        <!-- Exibindo o titulo da pergunta-->
+        <h1><%= pergunta.titulo %></h1>
+          <!-- Exibindo o descrição da pergunta-->
+          <p><%= pergunta.descricao %></p>
+          <hr>
+      <form method="POST" action="/responder">
+        <h3>Responda</h3>
+        <label>Resposta</label>
+        <!-- Texto area vai guardar o corpo-->
+          <textarea placeholder="Digite sua resposta" class="form-control" name="corpo" > </textarea><br>
+          <!-- Identificando a pergunta-->
+          <input type="hidden" name="pergunta" value="<%= pergunta.id %>">
+          <button type="submit" class="btn btn-primary">Responder</button>
+      </form>
+      <hr>
+      <h3>Respostas</h3>
+      <hr>
+      <!--Exibindo todas as resposta que recebi pelo banco de dados. A resposta é uma array por isso vamos usar o forEach -->
+      <% respostas.forEach(respostas => {%>
+        <br>
+        <!-- Exibindo cada respostas-->
+        <div class="card">
+            <div class="card-body">
+              <p> <%= respostas.corpo %> <br></p>
+            </div>
+        </div>
+      
+      <% }) %>
+     </div>
+</body>
+<%- include ("partials/footer") %>

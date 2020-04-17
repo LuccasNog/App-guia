@@ -9,7 +9,7 @@
         <!-- Transformando link em botao-->
         <a href="/perguntar" class="btn btn-primary">Realizar a pergunta</a>
         <hr>
-        <!-- Aqui vamos percorrer array de perguntas-->
+        <!-- Aqui vamos percorrer TODAS as perguntas-->
         <% perguntas.forEach(pergunta => { %>
             <br>
             <div class="card">
@@ -18,7 +18,16 @@
                       <h3><%= pergunta.titulo %></h3>   
                 </div>
                 <div class="card-footer">
-                   <button class="btn btn-primary">Responder</button>
+
+                    <!-- CADA PERGUNTA VAI TER O SEU PRÓPRIO LINK COM O SEU PRÓPRIO ID-->
+
+
+                    <!-- Vamos colocar pra ele linkar para o id da pergunta ai já vai encaminhar para tal pergunta -->
+                    <a href="/pergunta/ <%= pergunta.id %>">
+                         <!-- Colocando os links dinamicos dentro do botão, quando clicar irá levar para página da pergunta-->
+                         <button class="btn btn-primary">Responder</button>
+                    </a>
+                   
                 </div>
             </div>
         <% }) %>
